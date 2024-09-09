@@ -1,0 +1,17 @@
+{
+  "name": "zaubacorp-scraping",
+  "version": "1.0.0",
+  "description": "scraping data and saving to be db and creating a excel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dulfackerhisham",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^23.3.0",
+    "puppeteer-cluster": "^0.24.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}
