@@ -19,7 +19,7 @@ async function run() {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
 
-    const lastPage = 82; // Adjust this as necessary
+    const lastPage = 84; // Adjust this as necessary
 
     let htmlContent = `
         <html>
@@ -46,9 +46,9 @@ async function run() {
                 <tbody>
     `;
 
-    let rowIndex = 2398; // To track row number
+    let rowIndex = 2457; // To track row number
 
-    for (let i = 82; i <= lastPage; i++) {
+    for (let i = 84; i <= lastPage; i++) {
         await page.goto(`https://www.zaubacorp.com/company-list/p-${i}-company.html`, { timeout: 120000 }); // Increase navigation timeout
 
         const links = await page.$$eval('tr > td > a', (anchorTag) => anchorTag.map((a) => a.href));
