@@ -26,7 +26,7 @@ async function run() {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
 
-    const lastPage = 1; // Adjust this as necessary
+    const lastPage = 13333; // Adjust this as necessary
 
     let htmlContent = `
         <html>
@@ -60,22 +60,8 @@ async function run() {
     for (let i = 1; i <= lastPage; i++) {
         await page.goto(`https://www.zaubacorp.com/company-list/p-${i}-company.html`, { timeout: 120000 }); // Increase navigation timeout
 
-        const links = await page.$$eval('tr', rows => {
-            return Array.from(rows)
-                .filter(row => {
-                    // Get the text content of the 3rd <td> (if it exists)
-                    const thirdTd = row.querySelector('td:nth-child(3)');
-                    return thirdTd && thirdTd.innerText.includes('Pune'); // Filter rows with 'DELHI' in the 3rd <td>
-                })
-                .map(row => {
-                    // Get the link from the <a> tag in the 1st <td> of the filtered row
-                    const anchorTag = row.querySelector('td > a');
-                    return anchorTag ? anchorTag.href : null;
-                })
-                .filter(link => link); // Remove any null values if no <a> tag was found
-        });
-        
-        console.log(`Page ${i} - Found ${links.length} links with 'Mumbai' in the third <td>`);
+        const links = await page.$$eval('tr > td > a', (anchorTag) => anchorTag.map((a) => a.href));
+        console.log(`Page ${i} - Found ${links.length} links`);
 
         for (const link of links) {
             try {
